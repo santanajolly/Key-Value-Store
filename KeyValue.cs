@@ -8,8 +8,9 @@ namespace Key_Value_Store
 {
     struct KeyValue
     {
-        public string Key { get; }
-        public object Value { get; }
+        public readonly string Key;
+        //use readonly, you don't need to use {get;}
+        public readonly object Value;
 
         public KeyValue(string key, object value)
         {
@@ -17,5 +18,12 @@ namespace Key_Value_Store
             Value = value;
 
         }
+       
+
+
     }
+    
+            
+
+                
 }
