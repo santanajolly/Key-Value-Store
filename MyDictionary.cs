@@ -8,39 +8,47 @@ namespace Key_Value_Store
 {
     class MyDictionary
     {
-        KeyValue[] keyvalue = new KeyValue[] 
-        { new KeyValue("key1", "value1"),
-            new KeyValue("key2", "value2"),
-            new KeyValue("key3", "value2")};
+        KeyValue[] keyvalues = new KeyValue[] 
+        { new KeyValue("key1", 1),
+            new KeyValue("key2", 2),
+            new KeyValue("key3", 3)};
 
         
 
-        private int numstored = keyvalue.Length;
+        private int length
+        {
+            get { return this.keyvalues.Length; }
+        }
 
         public object this[string key]
         {
             get
             {
-                for (int i = 0; i < keyvalue.Length; i++)
+                for (int i = 0; i < keyvalues.Length; i++)
                 {
-                    if (keyvalue[i].Key.ToLower() == key.ToLower())
+                    if (keyvalues[i].Key.ToLower() == key.ToLower())
                     {
-                        return keyvalue[i].Value;
-                        numstored += 1;
+                        return keyvalues[i].Value;
                     }
                 }
                 throw new KeyNotFoundException();
             }
             set
             {
-                for (int i = 0; i < keyvalue.Length; i++)
+                for (int i = 0; i < keyvalues.Length; i++)
                 {
-                    if (keyvalue[i].Key.ToLower() == key.ToLower())
+                    if (keyvalues[i].Key.ToLower() == key.ToLower())
                     {
-                        keyvalue[i] = new KeyValue(key, value);
+                        keyvalues[i] = new KeyValue(key, value);
+                        break;
+                    }
+                    else
+                    {
+                        Array.Resize(ref keyvalues, length + 1);
+                        keyvalues[length - 1] = new KeyValue(key, value);
                     }
                 }
-                KeyValue[] temp = keyvalue;
+                
             }
         }
     }     
